@@ -29,7 +29,19 @@
 ## Installation
 
 ```bash
-$ npm install
+# install app packages (once)
+npm install
+
+# run postgres via docker  (evry system restart)
+npm run start:db
+
+# migrate models (once)
+npm run migrate
+
+# run app
+npm run start:dev
+
+# visit swagger http://localhost:4000/api
 ```
 
 ## Running the app
