@@ -15,7 +15,7 @@ import { Block, Transaction, Wallet } from './models';
       database: process.env.POSTGRES_DB,
       models: [Block, Transaction, Wallet],
       logging: false,
-      autoLoadModels: true,
+      // autoLoadModels: true,
       // sync: { force: true },
     }),
   ],

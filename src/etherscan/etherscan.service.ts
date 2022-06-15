@@ -51,17 +51,23 @@ export class EtherscanService {
     }
 
     this.getBlocksIntervalId = setInterval(async () => {
-      console.log(this.lastBlockNumber);
-      const block = await this.blocksService.findBlockByNumber(
-        this.lastBlockNumber,
-      );
+      try {
+        console.log(this.lastBlockNumber);
+        const block = await this.blocksService.findBlockByNumber(
+          this.lastBlockNumber,
+        );
 
-      if (!block) {
-        this.getBlockByNumber(this.lastBlockNumber).subscribe(async (data) => {
-          if (!data) return;
+        if (!block) {
+          this.getBlockByNumber(this.lastBlockNumber).subscribe(
+            async (data) => {
+              if (!data) return;
 
-          await this.blocksService.createBlock(new MapBlockDto(data));
-        });
+              await this.blocksService.createBlock(new MapBlockDto(data));
+            },
+          );
+        }
+      } catch (error) {
+        console.log(error);
       }
 
       this.lastBlockNumber++;
@@ -75,6 +81,6 @@ export class EtherscanService {
       clearInterval(this.getBlocksIntervalId);
     }
 
-    return { status: 'stoped' };
+    return { status: 'stopped' };
   }
 }
